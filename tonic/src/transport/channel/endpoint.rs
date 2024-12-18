@@ -79,7 +79,11 @@ impl Endpoint {
     /// Endpoint::from_shared("https://example.com".to_string());
     /// ```
     pub fn from_shared(s: impl Into<Bytes>) -> Result<Self, Error> {
-        let uri = Uri::from_maybe_shared(s.into()).map_err(|e| Error::new_invalid_uri().with(e))?;
+        let uri = Uri::from_maybe_shared(s.into()).map_err(|e| {
+            dbg!("3", &e);
+
+            Error::new_invalid_uri().with(e)
+        })?;
         Ok(Self::from(uri))
     }
 

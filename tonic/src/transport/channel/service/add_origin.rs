@@ -42,6 +42,7 @@ where
 
     fn call(&mut self, req: Request<ReqBody>) -> Self::Future {
         if self.scheme.is_none() || self.authority.is_none() {
+            dbg!("1");
             let err = crate::transport::Error::new_invalid_uri();
             return Box::pin(async move { Err::<Self::Response, _>(err.into()) });
         }
